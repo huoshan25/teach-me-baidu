@@ -27,24 +27,23 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
       <div className="w-full max-w-2xl mb-8">
         <div className="relative">
           {/* 搜索输入框 */}
-          <input
+          <div
             id="search-input"
-            type="text"
-            className="w-full px-4 py-3 text-lg border-2 rounded-lg bg-white focus:outline-none transition-all duration-200"
+            className="w-full px-4 py-3 text-lg border-2 rounded-lg bg-white transition-all duration-200 min-h-[56px] flex items-center"
             style={{
               borderColor: isInputFocused ? '#4285f4' : '#ddd',
               boxShadow: isInputFocused
                 ? '0 2px 8px rgba(66,133,244,0.3)'
                 : '0 2px 4px rgba(0,0,0,0.1)'
             }}
-            placeholder={currentStep < 2 ? '百度一下，你就知道' : ''}
-            value={currentStep > 3 ? searchQuery : ''}
-            readOnly
-          />
+          >
+            {/* 占位符文字 */}
+            {currentStep < 2 && (
+              <span className="text-gray-400">百度一下，你就知道</span>
+            )}
 
-          {/* 打字动画覆盖层 */}
-          {isTyping && (
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+            {/* 打字动画 */}
+            {isTyping && (
               <TypingAnimation
                 text={searchQuery}
                 isActive={isTyping}
@@ -52,8 +51,13 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
                   console.log('打字动画完成');
                 }}
               />
-            </div>
-          )}
+            )}
+
+            {/* 打字完成后显示的文字 */}
+            {currentStep > 3 && !isTyping && (
+              <span className="text-gray-900">{searchQuery}</span>
+            )}
+          </div>
 
           {/* 搜索图标 */}
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
