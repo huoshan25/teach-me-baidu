@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useUrlParams } from '@/hooks/useUrlParams';
 import { useAnimationSequence } from '@/hooks/useAnimationSequence';
 import { BaiduInterface } from '@/components/BaiduInterface';
@@ -28,9 +27,6 @@ export default function TeachPage() {
         currentStep={currentStep}
         isTyping={isTyping}
         currentStepText={currentStep >= 0 ? steps[currentStep] : ''}
-        onAnimationComplete={() => {
-          // 跳转逻辑已在useAnimationSequence中处理
-        }}
       />
 
       {/* 动画鼠标 */}

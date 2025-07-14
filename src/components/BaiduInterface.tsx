@@ -7,10 +7,9 @@ interface BaiduInterfaceProps {
   currentStep: number;
   isTyping: boolean;
   currentStepText: string;
-  onAnimationComplete: () => void;
 }
 
-export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStepText, onAnimationComplete }: BaiduInterfaceProps) {
+export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStepText }: BaiduInterfaceProps) {
   const isInputFocused = currentStep >= 2; // 点击搜索框后
 
   return (
@@ -90,17 +89,8 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
         <button
           id="search-button"
           className="px-6 py-2 bg-gray-100 text-gray-700 rounded border hover:bg-gray-200 transition-colors"
-          onClick={() => {
-            if (currentStep >= 5) {
-              onAnimationComplete();
-            }
-          }}
         >
           百度一下
-        </button>
-
-        <button className="px-6 py-2 bg-gray-100 text-gray-700 rounded border hover:bg-gray-200 transition-colors">
-          手气不错
         </button>
       </div>
 
