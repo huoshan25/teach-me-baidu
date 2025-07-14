@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -26,9 +27,16 @@ export default function Home() {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(generatedLink);
-      alert('链接已复制到剪贴板！');
+      toast.success('链接已复制到剪贴板！', {
+        description: '现在可以分享给需要学习百度搜索的朋友了',
+        duration: 3000,
+      });
     } catch (err) {
       console.error('复制失败:', err);
+      toast.error('复制失败', {
+        description: '请手动复制链接',
+        duration: 3000,
+      });
     }
   };
 

@@ -87,28 +87,6 @@ export const ANIMATION_STEPS = [
 ### 修改动画效果
 编辑 `src/utils/animations.ts` 中的动画变体配置。
 
-## 🚀 部署
-
-### Vercel 部署（推荐）
-
-1. 将代码推送到 GitHub
-2. 在 [Vercel](https://vercel.com) 导入项目
-3. 自动部署完成
-
-### 其他平台
-
-```bash
-# 构建生产版本
-pnpm build
-
-# 启动生产服务器
-pnpm start
-```
-
-## 📝 许可证
+## 许可证
 
 MIT License
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
