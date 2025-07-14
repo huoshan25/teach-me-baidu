@@ -1,0 +1,60 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
+interface TypingAnimationProps {
+  text: string;
+  isActive: boolean;
+  onComplete?: () => void;
+  speed?: number;
+}
+
+export function TypingAnimation({ 
+  text, 
+  isActive, 
+  onComplete, 
+  speed = 100 
+}: TypingAnimationProps) {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isActive) {
+      setDisplayedText('');
+      setCurrentIndex(0);
+      return;
+    }
+
+    if (currentIndex < text.length) {
+      const timer = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, speed);
+
+      return () => clearTimeout(timer);
+    } else if (currentIndex === text.length && onComplete) {
+      // 打字完成后立即调用回调
+      const completeTimer = setTimeout(onComplete, 200);
+      return () => clearTimeout(completeTimer);
+    }
+  }, [currentIndex, text, isActive, speed, onComplete]);
+
+  return (
+    <div className="relative">
+      <span className="text-gray-900">
+        {displayedText.split('').map((char, index) => (
+          <span key={index} className="inline-block">
+            {char}
+          </span>
+        ))}
+      </span>
+
+      {/* 光标闪烁效果 */}
+      {isActive && currentIndex <= text.length && (
+        <span
+          className="inline-block w-0.5 h-5 bg-gray-900 ml-0.5 animate-pulse"
+        />
+      )}
+    </div>
+  );
+}
