@@ -6,14 +6,16 @@ interface TypingAnimationProps {
   text: string;
   isActive: boolean;
   onComplete?: () => void;
+  onProgress?: (currentText: string) => void;
   speed?: number;
 }
 
-export function TypingAnimation({ 
-  text, 
-  isActive, 
-  onComplete, 
-  speed = 100 
+export function TypingAnimation({
+  text,
+  isActive,
+  onComplete,
+  onProgress,
+  speed = 100
 }: TypingAnimationProps) {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,8 +29,14 @@ export function TypingAnimation({
 
     if (currentIndex < text.length) {
       const timer = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex]);
+        const newText = displayedText + text[currentIndex];
+        setDisplayedText(newText);
         setCurrentIndex(prev => prev + 1);
+
+        // 通知父组件打字进度
+        if (onProgress) {
+          onProgress(newText);
+        }
       }, speed);
 
       return () => clearTimeout(timer);
@@ -37,7 +45,7 @@ export function TypingAnimation({
       const completeTimer = setTimeout(onComplete, 200);
       return () => clearTimeout(completeTimer);
     }
-  }, [currentIndex, text, isActive, speed, onComplete]);
+  }, [currentIndex, text, isActive, speed, onComplete, onProgress, displayedText]);
 
   return (
     <div className="relative inline-block">
