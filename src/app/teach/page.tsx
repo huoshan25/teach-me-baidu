@@ -22,16 +22,6 @@ export default function TeachPage() {
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
-      {/* 返回首页按钮 */}
-      <div className="fixed top-4 left-4 z-50">
-        <Link
-          href="/"
-          className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm"
-        >
-          ← 返回首页
-        </Link>
-      </div>
-
       {/* 百度界面 */}
       <BaiduInterface
         searchQuery={searchQuery}
