@@ -43,7 +43,8 @@ pnpm dev
 - **框架**: Next.js 15 + React 19
 - **语言**: TypeScript
 - **样式**: Tailwind CSS
-- **动画**: Framer Motion
+- **动画**: GSAP (GreenSock)
+- **UI组件**: Shadcn/ui
 - **包管理**: pnpm
 
 ## 📁 项目结构
