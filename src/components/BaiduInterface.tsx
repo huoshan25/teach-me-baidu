@@ -31,7 +31,7 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 pb-32">
       {/* 百度Logo */}
       <div className="mb-8">
         <div className="flex items-end gap-2">
