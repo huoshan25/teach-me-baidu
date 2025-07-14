@@ -6,10 +6,11 @@ interface BaiduInterfaceProps {
   searchQuery: string;
   currentStep: number;
   isTyping: boolean;
+  currentStepText: string;
   onAnimationComplete: () => void;
 }
 
-export function BaiduInterface({ searchQuery, currentStep, isTyping, onAnimationComplete }: BaiduInterfaceProps) {
+export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStepText, onAnimationComplete }: BaiduInterfaceProps) {
   const isInputFocused = currentStep >= 2; // 点击搜索框后
 
   return (
@@ -71,6 +72,13 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, onAnimation
             </svg>
           </div>
         </div>
+
+        {/* 步骤提示文字 */}
+        {currentStepText && (
+          <div className="text-center mt-4">
+            <p className="text-gray-500 text-sm">{currentStepText}</p>
+          </div>
+        )}
       </div>
 
       {/* 搜索按钮 */}

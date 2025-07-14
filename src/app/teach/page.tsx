@@ -4,20 +4,19 @@ import { useUrlParams } from '@/hooks/useUrlParams';
 import { useAnimationSequence } from '@/hooks/useAnimationSequence';
 import { BaiduInterface } from '@/components/BaiduInterface';
 import { AnimatedCursor } from '@/components/AnimatedCursor';
-import { StepIndicator } from '@/components/StepIndicator';
 
 export default function TeachPage() {
   const { searchQuery } = useUrlParams();
   const { currentStep, isTyping } = useAnimationSequence(searchQuery);
 
   const steps = [
-    '欢迎来到百度教学',
-    '移动到搜索框',
+    '让我来教你正确的打开方式',
+    '找到输入框并选中',
     '点击搜索框',
     '输入搜索内容',
-    '移动到搜索按钮',
-    '点击搜索',
-    '跳转到结果页面'
+    '移动鼠标到搜索按钮',
+    '点击搜索按钮...',
+    '这就是你所谓的困难吗？'
   ];
 
   return (
@@ -32,14 +31,12 @@ export default function TeachPage() {
         </a>
       </div>
 
-      {/* 步骤指示器 */}
-      <StepIndicator currentStep={currentStep} steps={steps} />
-      
       {/* 百度界面 */}
       <BaiduInterface
         searchQuery={searchQuery}
         currentStep={currentStep}
         isTyping={isTyping}
+        currentStepText={currentStep >= 0 ? steps[currentStep] : ''}
         onAnimationComplete={() => {
           // 跳转逻辑已在useAnimationSequence中处理
         }}
