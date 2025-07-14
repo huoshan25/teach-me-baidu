@@ -1,6 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { AnimatedCard } from '@/components/ui/animated-card';
+import { Typewriter } from '@/components/ui/typewriter';
+import { FloatingElement } from '@/components/ui/floating-element';
+import { Copy, ExternalLink, Sparkles } from 'lucide-react';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,82 +33,84 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl">
-        {/* 标题 */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            🎯 帮伸手党百度
-          </h1>
-          <p className="text-gray-600 text-lg">
-            生成一个教学链接，让别人学会如何使用百度搜索
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-muted/40 flex items-center justify-center p-4">
+      <AnimatedCard className="w-full max-w-2xl shadow-2xl border-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60" delay={200}>
+        <CardHeader className="text-center space-y-4">
+          <FloatingElement delay={500}>
+            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mb-4">
+              <Sparkles className="w-8 h-8 text-primary-foreground" />
+            </div>
+          </FloatingElement>
+          <CardTitle className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <Typewriter text="帮伸手党百度" delay={800} speed={150} />
+          </CardTitle>
+          <CardDescription className="text-lg text-muted-foreground">
+            <Typewriter text="生成一个教学链接，让别人学会如何使用百度搜索" delay={2000} speed={50} />
+          </CardDescription>
+        </CardHeader>
 
-        {/* 输入区域 */}
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              输入要搜索的内容：
-            </label>
-            <input
+        <CardContent className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="search-query" className="text-sm font-medium">
+              输入要搜索的内容
+            </Label>
+            <Input
+              id="search-query"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="例如：如何使用百度"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="h-12 text-base"
               onKeyPress={(e) => e.key === 'Enter' && generateLink()}
             />
           </div>
 
-          <button
+          <Button
             onClick={generateLink}
             disabled={!searchQuery.trim()}
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="w-full h-12 text-base font-medium"
+            size="lg"
           >
+            <Sparkles className="w-4 h-4 mr-2" />
             生成教学链接
-          </button>
-        </div>
+          </Button>
 
-        {/* 生成的链接 */}
-        {generatedLink && (
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              生成的教学链接：
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={generatedLink}
-                readOnly
-                className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded text-sm"
-              />
-              <button
-                onClick={copyToClipboard}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm"
-              >
-                复制
-              </button>
-            </div>
-            <p className="text-xs text-gray-500 mt-2">
-              分享这个链接给需要学习如何百度的朋友吧！
-            </p>
-          </div>
-        )}
-
-        {/* 示例 */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500 mb-4">💡 使用示例：</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="bg-blue-50 p-3 rounded-lg">
-              <strong>输入：</strong>&ldquo;如何煮鸡蛋&rdquo;
-            </div>
-            <div className="bg-green-50 p-3 rounded-lg">
-              <strong>效果：</strong>生成教学动画链接
-            </div>
-          </div>
-        </div>
-      </div>
+          {/* 生成的链接 */}
+          {generatedLink && (
+            <AnimatedCard className="bg-muted/50 border-dashed" delay={300}>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <FloatingElement delay={100}>
+                    <ExternalLink className="w-5 h-5" />
+                  </FloatingElement>
+                  生成的教学链接
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex gap-2">
+                  <Input
+                    value={generatedLink}
+                    readOnly
+                    className="flex-1 bg-background"
+                  />
+                  <Button
+                    onClick={copyToClipboard}
+                    variant="secondary"
+                    size="sm"
+                    className="shrink-0 hover:scale-105 transition-transform"
+                  >
+                    <Copy className="w-4 h-4 mr-1" />
+                    复制
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  分享这个链接给需要学习如何百度的朋友吧！
+                </p>
+              </CardContent>
+            </AnimatedCard>
+          )}
+        </CardContent>
+      </AnimatedCard>
     </div>
   );
 }
