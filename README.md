@@ -62,30 +62,7 @@ src/
 ├── hooks/
 │   ├── useAnimationSequence.ts  # 动画序列控制
 │   └── useUrlParams.ts          # URL参数解析
-└── utils/
-    ├── animations.ts     # 动画配置
-    └── constants.ts      # 常量定义
 ```
-
-## 🎨 自定义配置
-
-### 修改动画时长
-编辑 `src/utils/constants.ts` 中的 `ANIMATION_STEPS` 配置：
-
-```typescript
-export const ANIMATION_STEPS = [
-  { name: 'showCursor', duration: 1000 },    // 显示鼠标
-  { name: 'moveToInput', duration: 2000 },   // 移动到输入框
-  { name: 'clickInput', duration: 500 },     // 点击输入框
-  { name: 'typeText', duration: 2000 },      // 输入文字
-  { name: 'moveToButton', duration: 1500 },  // 移动到按钮
-  { name: 'clickButton', duration: 500 },    // 点击按钮
-  { name: 'redirect', duration: 1000 }       // 跳转
-];
-```
-
-### 修改动画效果
-编辑 `src/utils/animations.ts` 中的动画变体配置。
 
 ## 许可证
 
