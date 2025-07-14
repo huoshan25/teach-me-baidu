@@ -40,10 +40,10 @@ export function TypingAnimation({
   }, [currentIndex, text, isActive, speed, onComplete]);
 
   return (
-    <div className="relative">
-      <span className="text-gray-900">
+    <div className="relative inline-block">
+      <span className="text-gray-900 whitespace-nowrap">
         {displayedText.split('').map((char, index) => (
-          <span key={index} className="inline-block">
+          <span key={index} className="inline">
             {char}
           </span>
         ))}

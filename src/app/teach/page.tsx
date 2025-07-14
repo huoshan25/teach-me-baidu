@@ -31,13 +31,6 @@ export default function TeachPage() {
 
       {/* 动画鼠标 */}
       <AnimatedCursor />
-
-      {/* 底部提示 */}
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
-        <div className="bg-black/70 text-white px-4 py-2 rounded-lg text-sm">
-          正在教你如何使用百度搜索 &ldquo;{searchQuery}&rdquo;
-        </div>
-      </div>
     </div>
   );
 }
