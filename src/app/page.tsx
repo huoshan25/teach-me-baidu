@@ -93,7 +93,7 @@ export default function Home() {
           <p className="text-sm text-gray-500 mb-4">💡 使用示例：</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div className="bg-blue-50 p-3 rounded-lg">
-              <strong>输入：</strong>"如何煮鸡蛋"
+              <strong>输入：</strong>&ldquo;如何煮鸡蛋&rdquo;
             </div>
             <div className="bg-green-50 p-3 rounded-lg">
               <strong>效果：</strong>生成教学动画链接

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useUrlParams } from '@/hooks/useUrlParams';
 import { useAnimationSequence } from '@/hooks/useAnimationSequence';
 import { BaiduInterface } from '@/components/BaiduInterface';
@@ -23,12 +24,12 @@ export default function TeachPage() {
     <div className="min-h-screen bg-white relative overflow-hidden">
       {/* 返回首页按钮 */}
       <div className="fixed top-4 left-4 z-50">
-        <a
+        <Link
           href="/"
           className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm"
         >
           ← 返回首页
-        </a>
+        </Link>
       </div>
 
       {/* 百度界面 */}
@@ -48,7 +49,7 @@ export default function TeachPage() {
       {/* 底部提示 */}
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
         <div className="bg-black/70 text-white px-4 py-2 rounded-lg text-sm">
-          正在教你如何使用百度搜索 "{searchQuery}"
+          正在教你如何使用百度搜索 &ldquo;{searchQuery}&rdquo;
         </div>
       </div>
     </div>
