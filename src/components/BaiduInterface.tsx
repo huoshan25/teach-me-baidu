@@ -31,10 +31,11 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 pb-32">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 pb-40 md:pb-32">
       {/* 百度Logo */}
       <div className="mb-8">
-        <div className="flex items-end gap-2">
+        {/* 桌面端布局 */}
+        <div className="hidden md:flex items-end gap-2">
           <span className="text-2xl text-black">需要让我帮你</span>
           <Image
             src="/img/baidu_logo.png"
@@ -45,10 +46,23 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
           />
           <span className="text-2xl text-black">一下么？</span>
         </div>
+
+        {/* 移动端布局 */}
+        <div className="md:hidden flex items-end justify-center gap-1">
+          <span className="text-lg text-black">需要让我帮你</span>
+          <Image
+            src="/img/baidu_logo.png"
+            alt="Baidu Logo"
+            width={120}
+            height={80}
+            className="object-contain"
+          />
+          <span className="text-lg text-black">一下么？</span>
+        </div>
       </div>
 
       {/* 搜索框容器 */}
-      <div className="w-full max-w-2xl mb-8">
+      <div className="w-full max-w-2xl mb-8 px-4 md:px-0">
         <div className="flex items-stretch bg-white border-2 rounded-lg overflow-hidden transition-all duration-200"
           style={{
             borderColor: isInputFocused ? '#4285f4' : '#ddd',
@@ -61,7 +75,7 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
           {/* 搜索输入框 */}
           <div
             id="search-input"
-            className="flex-1 px-4 py-3 text-lg bg-white h-[56px] flex items-center overflow-x-auto overflow-y-hidden scrollbar-hide"
+            className="flex-1 px-3 md:px-4 py-3 text-base md:text-lg bg-white h-[56px] flex items-center overflow-x-auto overflow-y-hidden scrollbar-hide"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none'
@@ -95,8 +109,8 @@ export function BaiduInterface({ searchQuery, currentStep, isTyping, currentStep
           {/* 搜索按钮 */}
           <button
             id="search-button"
-            className="px-6 bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors flex-shrink-0 flex items-center justify-center"
-            style={{ minWidth: '100px' }}
+            className="px-4 md:px-6 bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors flex-shrink-0 flex items-center justify-center text-sm md:text-base"
+            style={{ minWidth: '80px' }}
           >
             百度一下
           </button>
