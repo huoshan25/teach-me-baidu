@@ -6,6 +6,9 @@ import { gsap } from 'gsap';
 export function useAnimationSequence(searchQuery: string) {
   const [currentStep, setCurrentStep] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
+
+  // 检测当前是百度还是Google页面
+  const isGooglePage = typeof window !== 'undefined' && window.location.pathname.includes('/google');
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export function useAnimationSequence(searchQuery: string) {
       })
       .to('#animated-cursor', {
         x: () => {
-          const input = document.getElementById('search-input');
+          const input = document.getElementById(isGooglePage ? 'google-search-input' : 'search-input');
           if (input) {
             const rect = input.getBoundingClientRect();
             return rect.left + rect.width / 2;
@@ -46,7 +49,7 @@ export function useAnimationSequence(searchQuery: string) {
           return window.innerWidth / 2;
         },
         y: () => {
-          const input = document.getElementById('search-input');
+          const input = document.getElementById(isGooglePage ? 'google-search-input' : 'search-input');
           if (input) {
             const rect = input.getBoundingClientRect();
             return rect.top + rect.height / 2;
@@ -98,7 +101,7 @@ export function useAnimationSequence(searchQuery: string) {
       })
       .to('#animated-cursor', {
         x: () => {
-          const button = document.getElementById('search-button');
+          const button = document.getElementById(isGooglePage ? 'google-search-button' : 'search-button');
           if (button) {
             const rect = button.getBoundingClientRect();
             return rect.left + rect.width / 2;
@@ -106,7 +109,7 @@ export function useAnimationSequence(searchQuery: string) {
           return window.innerWidth / 2 + 100;
         },
         y: () => {
-          const button = document.getElementById('search-button');
+          const button = document.getElementById(isGooglePage ? 'google-search-button' : 'search-button');
           if (button) {
             const rect = button.getBoundingClientRect();
             return rect.top + rect.height / 2;
@@ -155,8 +158,13 @@ export function useAnimationSequence(searchQuery: string) {
         ease: 'power2.out'
       })
       .call(() => {
-        console.log('跳转到百度搜索');
-        window.location.href = `https://www.baidu.com/s?wd=${encodeURIComponent(searchQuery)}`;
+        if (isGooglePage) {
+          console.log('跳转到Google搜索');
+          window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+        } else {
+          console.log('跳转到百度搜索');
+          window.location.href = `https://www.baidu.com/s?wd=${encodeURIComponent(searchQuery)}`;
+        }
       });
     };
 

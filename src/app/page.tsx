@@ -12,8 +12,25 @@ import { Typewriter } from '@/components/ui/typewriter';
 import { FloatingElement } from '@/components/ui/floating-element';
 import { Copy, ExternalLink, Sparkles } from 'lucide-react';
 
+enum SearchEngine {
+  Baidu = 'baidu',
+  Google = 'google',
+}
+
 export default function Home() {
+  const SEARCH_ENGINES = {
+    [SearchEngine.Baidu]: {
+      name: '百度',
+      path: 'baidu'
+    },
+    [SearchEngine.Google]: {
+      name: 'Google',
+      path: 'google'
+    }
+  } as const;
+
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchEngine, setSearchEngine] = useState<SearchEngine>(SearchEngine.Baidu);
   const [generatedLink, setGeneratedLink] = useState('');
 
   const generateLink = () => {
@@ -21,7 +38,8 @@ export default function Home() {
 
     const baseUrl = window.location.origin;
     const encodedQuery = encodeURIComponent(searchQuery);
-    const link = `${baseUrl}/teach?q=${encodedQuery}`;
+    const config = SEARCH_ENGINES[searchEngine];
+    const link = `${baseUrl}/${config.path}?q=${encodedQuery}`;
     setGeneratedLink(link);
   };
 
@@ -29,7 +47,7 @@ export default function Home() {
     try {
       await navigator.clipboard.writeText(generatedLink);
       toast.success('链接已复制到剪贴板！', {
-        description: '现在可以分享给需要学习百度搜索的朋友了',
+        description: `现在可以分享给需要学习${SEARCH_ENGINES[searchEngine].name}搜索的朋友了`,
         duration: 3000,
       });
     } catch (err) {
@@ -40,6 +58,8 @@ export default function Home() {
       });
     }
   };
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-muted/40 flex items-center justify-center p-4">
@@ -65,6 +85,26 @@ export default function Home() {
         </CardHeader>
 
         <CardContent className="space-y-6">
+          {/* 搜索引擎选择 */}
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">选择搜索引擎</Label>
+            <div className="flex space-x-4">
+              {Object.entries(SEARCH_ENGINES).map(([key, config]) => (
+                <label key={key} className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="searchEngine"
+                    value={key}
+                    checked={searchEngine === key}
+                    onChange={(e) => setSearchEngine(e.target.value as SearchEngine)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm">{config.name}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="search-query" className="text-sm font-medium">
               输入要搜索的内容
@@ -74,7 +114,7 @@ export default function Home() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="例如：如何使用百度"
+              placeholder={`例如：如何使用${SEARCH_ENGINES[searchEngine].name}`}
               className="h-12 text-base"
               onKeyPress={(e) => e.key === 'Enter' && generateLink()}
             />
