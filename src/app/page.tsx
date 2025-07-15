@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -45,8 +46,14 @@ export default function Home() {
       <AnimatedCard className="w-full max-w-2xl shadow-2xl border-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60" delay={200}>
         <CardHeader className="text-center space-y-4">
           <FloatingElement delay={500}>
-            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mb-4">
-              <Sparkles className="w-8 h-8 text-primary-foreground" />
+            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-300 to-blue-200 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+              <Image
+                src="/favicon.svg"
+                alt="Teach Me Baidu Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
             </div>
           </FloatingElement>
           <CardTitle className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
@@ -76,7 +83,7 @@ export default function Home() {
           <Button
             onClick={generateLink}
             disabled={!searchQuery.trim()}
-            className="w-full h-12 text-base font-medium"
+            className="w-full h-12 text-base font-medium bg-gradient-to-br from-blue-500 to-blue-600"
             size="lg"
           >
             <Sparkles className="w-4 h-4 mr-2" />
